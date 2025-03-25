@@ -1,0 +1,336 @@
+/* All sections have these properties */
+	
+	:root{
+		--bannerTeal: rgba(10, 50, 45, 1);
+		--bgTeal: rgba(151, 223, 210, 1);
+	}
+	
+	a.weblink {
+		color: var(--bannerTeal);
+		display: inline-block;
+		position: relative;
+		text-decoration: none;
+		&:before {
+			background-color: var(--bannerTeal);
+			content: '';
+			height: 2px;
+			position: absolute;
+			bottom: 0px;
+			left: 50%;
+			transform: translateX(-50%);
+			transition: width 0.3s ease-in-out;
+			width: 100%;
+		}
+		&:hover {
+			&:before {
+				width:0;
+			}
+		}
+	}
+	
+	body {
+		font-size: 100%;
+	}
+	h1 {
+		font-family: "Times New Roman", sans-serif;
+		font-size: 2.5em;
+		font-style: bold;
+	}
+	p {
+		padding-top: 0;
+		font-size: 0.9em;
+	}
+	
+	/* on main page, the stylish lines hugging my tagline */
+	.style-line { 
+		font-family: "Gill Sans", sans-serif;
+		font-style: italic;
+		font-size: 1.1em;
+		line-height: 0.25;
+		margin: 0;
+		text-align: center;
+	}
+	
+	li {
+		font-size: 0.9em;
+		list-style-position: outside;
+	}
+	
+/* Sticky Navigation Bar */
+  .navbar {
+    background-color: var(--bannerTeal);
+	padding: 10px 0; /* broaden the height of the section */
+  }
+
+  .navbar a {
+    color: white !important;
+	font-weight: normal;
+    font-size: 1.15em;
+	position: relative; /* Needed for underline effect */
+    text-decoration: none; /* Remove default underline */
+    padding-bottom: var(--underline-gap, 6px); /* Controls distance from text */
+  }
+
+/* Underline Hover Effect */
+    .navbar a::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		height: 4px; /* Thickness of the underline */
+		background-color: var(--bgTeal); 
+		transform: scaleX(0);
+		transform-origin: left;
+		transition: transform 0.3s ease-in-out;
+    }
+  .navbar a:hover::after {
+    transform: scaleX(1);
+  }
+
+/* Navbar Fixed at Top */
+  .navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+  }
+  
+/* Align Navbar Items to the Right */
+  .navbar-nav {
+    margin-left: auto; /* Push items to the right */
+  }
+
+/* Prevent Section Content from Overlapping with Navbar */
+  section {
+    scroll-margin-top: 40px; /* Prevents content from being hidden behind navbar */
+  }
+
+/* Smooth Scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  
+  
+/* Custom styles for the project content section */
+    #project {
+      padding: 80px 0 40px;
+	  background: var(--bgTeal);
+    }
+
+	
+	/* Icon container*/
+	.about-icons {
+		margin-top: 15px;
+		display: flex;
+		justify-content: center;
+		gap: 20px;
+	}
+	
+	/* Icon styling */
+	.about-icons img{
+		width: 40px;
+		height: 40px;
+		transition: color 0.3s ease;
+	}
+	.about-icons a:hover img{
+		filter: brightness(0) saturate(100%) invert(70%) sepia(18%) saturate(482%) hue-rotate(120deg) brightness(95%) contrast(85%);
+		/* color: rgba(151, 223, 210, 1);*/
+	}
+	
+    .about-text {
+	  text-align: left;
+      max-width: 600px;
+    }
+	
+	
+	#about .ul {
+	  /* list-style-type: disc; */
+	  display: inline-block;
+	  text-align: left;
+	}
+	#about .list-container {
+	  font-size: 16px;
+	  color: #333
+	  text-align: left;
+	}
+	
+	
+	
+	
+	#projects {
+	  padding: 40px 0;
+	}
+	
+	/* Skill box style */
+	.skill-box {
+	  background-color: #97DFD2;
+	  padding: 5px 10px;
+	  margin: 2px;
+	  border-radius: 4px;
+	  font-size: 0.9em;
+	  display: inline-block;
+	}
+
+	/* Card hover effect: zoom-in with overlay */
+	.card {
+	overflow: hidden;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	}
+	
+	/* Apply hover effects **only if card does NOT have .no-hover** */
+	.card:not(.no-hover):hover {
+	transform: translateY(-5px); /* Slight lift */
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+	}
+
+	/* Container for project image with hover effect */
+	.card-img-container {
+	position: relative;
+	overflow: hidden;
+	}
+
+	.card-img-container img {
+	transition: transform 0.4s ease;
+	width: 100%;
+	height: auto;
+	display: block;
+	}
+
+	/* Image zoom effect */
+	.card:not(.no-hover):hover .card-img-container img {
+	transform: scale(1.1);
+	}
+
+	/* Gradient overlay - subtle and professional */
+	.card-img-container::before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	/* background: linear-gradient(to top right, rgba(0, 0, 255, 0.3), rgba(128, 0, 128, 0.3)); */
+	opacity: 0;
+	transition: opacity 0.4s ease;
+	}
+
+	.card:not(.no-hover):hover .card-img-container::before {
+	opacity: 1;
+	}
+	
+	
+/* Parent container */
+.comparison-container {
+    position: relative;
+    width: auto;
+    max-width: 768px; /* Adjust as needed */
+    height: auto;
+    /* overflow: hidden; */
+}
+
+/* Ensures images fully overlap */
+.comparison-container img {
+    display: block;
+    width: auto;
+    height: auto;
+}
+
+.before-image {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: auto;
+	height: auto;
+	z-index: 1; /* Keeps it under the after image */
+}
+
+/* The after-image container (initially covers 50%) */
+.img-comp-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%; /* Default: reveal half */
+    height: auto;
+    overflow: hidden;
+	z-index: 2;
+}
+
+/* The After image  inside the overlay */
+.img-comp-overlay img {
+    width: auto;
+    height: auto;
+    display: block;
+	z-index: 3;
+}
+
+/* The draggable slider */
+.slider {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 6px;
+    height: 100%;
+    background: rgba(161, 94, 73, 0.8);
+    cursor: ew-resize;
+	z-index:10;
+}
+
+
+	
+	/* Contact Section Styling */
+  #contact {
+    background-color: var(--bannerTeal);
+    color: white;
+    padding: 50px 0;
+    text-align: center;
+  }
+
+  /* Flexbox for Icon + Text Layout */
+  .contact-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  /* Icon Container */
+  .contact-icons {
+    display: flex;
+    gap: 20px;
+  }
+
+  /* Custom Icon Styling */
+  .contact-icons img {
+    width: 40px;
+    height: 40px;
+    transition: filter 0.3s ease;
+  }
+
+  /* Hover Effect: Changes Color */
+  .contact-icons a:hover img {
+    filter: brightness(70%) saturate(100%) invert(70%) sepia(18%) saturate(482%) 
+            hue-rotate(120deg) brightness(95%) contrast(85%);
+  }
+
+  /* Responsive Adjustments for mobile */
+  @media (max-width: 768px) {
+    .about-avatar{
+	     margin-bottom: 20px;
+	}
+	.navbar-collapse {
+		text-align: right;
+	}
+	.navbar-nav {
+		margin-left: auto !important;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+	}
+    .contact-content {
+      flex-direction: column;
+      text-align: center;
+    }
+  }

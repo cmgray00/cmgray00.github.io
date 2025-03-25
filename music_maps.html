@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project: Music Maps</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  
+  <link rel="stylesheet" href="project_style.css"> <!-- reference the master styling -->
+</head>
+
+
+<body>
+
+	<div id='header'></div>
+	
+	<main>
+	
+	<section id='project'>
+	<div class="container text-left mb-4"> <!-- container of containers -->
+		
+		  <p>December, 2023</p>
+		  <h1 class="mb-3">How Diverse is Global Music on Spotify?</h1>
+			<p>An independent project in the middle of graduate school, the primary objective was an introduction to unsupervised machine learning models. Nonetheless,
+			I also experimented with my first global maps (static and faceted) and discovered how to implement a 
+			dual color scale - a relatively uncommon technique that extracted more value from data in this scenario.</p>
+			<div class="content">
+				<h2>Introduction</h2>
+				
+				<p>Globalization and the internet have made different countries and cultures more accessible
+				to each other. Particularly in the digital age and data boom, it’s also getting easier to 
+				analyze what music the masses want to listen to. This poses quite the opportunity for record labels and 
+				musical artists, who want to release hits in this multi-billion-dollar industry.</p>
+
+				<p> In such a melting pot with a unified goal, 
+				where does this leave the diversity of music? Can we 
+				see an identifiable set of musical traits that make songs popular overall? Just in certain 
+				countries?</p>
+			</div>
+		 
+		<!-- About the Data and its accompanying viz --> 
+		<div class="row justify-content-left align-items-center"> <!-- the row -->
+			<div class="col-md mb-4">
+			  <h2 class="mb-3">About the Data</h2>
+				<div class="content">
+					<p>A sample of Spotify data from 
+					<a href='https://www.gigasheet.com/sample-data/top-spotify-songs-in-73-countries-daily-updated' 
+					   target="_blank" 
+					   rel="noopener noreferrer"
+					   class='weblink'>Gigasheet</a>
+					describes the top 50-or-so songs per 73 countries for a consecutive 10 days (October 18 to 27 inclusive, 2023).
+					One of these countries couldn't be identified for mapping, but was still analytically valuable.</p>
+					
+					<p>Track traits studied included the following, with definitions 
+					<a href='https://developer.spotify.com/documentation/web-api/reference/get-audio-features' 
+					   target="_blank" 
+					   rel="noopener noreferrer"
+					   class='weblink'>here</a>:
+						<ul>
+							<li>Album (or single) Release Date</li>
+							<li>Popularity</li>
+							<li>Explicity</li>
+							<li>Duration</li>
+							<li>Danceability</li>
+							<li>Energy</li>
+							<li>Key</li>
+							<li>Loudness</li>
+							<li>Mode</li>
+							<li>Speechiness</li>
+							<li>Acousticness</li>
+							<li>Instrumentalness</li>
+							<li>Liveness</li>
+							<li>Valence</li>
+							<li>Tempo</li>
+							<li>Time Signature</li>
+						</ul>
+
+					<p>Country groupings (i.e. continents, subregions) and coordinates came from the ‘rnaturalearthdata’ R library.</p>
+				</div>
+			</div> <!-- end column 1 -->
+			
+			<!-- Viz's on right -->
+			<div class="col-md mb-4"> 
+					<img src='images/projects/spotify/data_coverage.png' alt='Map of Data Coverage'>
+			</div>
+		</div> <!-- End side-by-side of About Data and its accompanying viz -->
+			
+		  <h2 class='mb-3'>Findings, <i>in a nutshell</i></h2>
+			<div class="content">
+				<p>Unsupervised machine learning via clustering and association rules
+				were used to assess the diversity of global music
+				on Spotify's "Top 50" hits per country between October 18 and 27, 2023 (inclusive).</p>
+				
+				<p>2,241 unique songs were summarized into 6 major music categories via hierarchical classification. 
+					In order of prevalence, those categories were:
+					<ol>
+						<li><b>Fad Pop (~91.6%):</b> a short-lived category of "fresh meat" - typically released in the past few months.
+						Aside most consistently adhering to ~3 minutes in duration and trending D, no other
+						in-scope traits stand out.</li>
+						<li><b>Nostalgia (~2.6%):</b> Released at least a decade ago, these songs are louder with high energy
+							and positive vibes. Elder songs are less explicit.</li>
+						<li><b>Jammin' (~2.4%):</b> The longest songs, with highest danceability and energy. Surprisingly,
+							they dominate the "jogger heartbeat" tempo (as opposed to a faster, "intense exercise" one.)</li>
+						<li><b>Instrumental (~2.1%):</b> Instruments are emphasized over vocals and exist almost exclusively
+							in time signature 4. Interestingly, they tend to be quieter than other categories. Perhaps this has
+							something to do with rebalancing multiple instruments on recorded formats(?)</li>
+						<li><b>Rap (~0.7%):</b> Has the most words (which are also most likely to be explicit). They
+							adhere to the middle keys of standard Pitch Class notation, where G and G# are popular and C
+							is generally avoided. Fans appreciate both recorded and live versions.</li>
+					</ol>
+				</p>
+				
+				<p>Clearly, <b>Spotify's listeners quickly discover new music - but that music's traits are
+				"middle of the road"</b>; non-polarizing... for mass appeal, perhaps?</p> 
+
+				<p>Among October's Top-50's, the newest releases are louder, more energetic, explicit, and negative. 
+				While such a description makes our "spider sense" tingle "teenager" - we require Spotify user demographics 
+				to investigate just how much their Top 50 charts are influenced by teens versus other generations.</p>
+				
+				<p>That said, <b>musicians seeking Spotify popularity should know this:</b></p>
+					<ul>
+						<li>If your song hasn't achieved Top-50 in the first few months of release, it likely won't.</li>
+						<li>Songs that have been out for longer than a few months can still make it - but these typically have
+							more distinctive traits.</li>
+						<li><i>Where</i> your distinctive song is released matters; countries have their own preferences.</li>
+						<li>Kazakhstan (yellow on the Fad Pop map, below), Greece, and the United
+							Arab Emirates are great places to introduce new music - as they appreciate
+							ALL categories on their Top-50 charts. (This can't be said for 
+							the remaining 70 countries studied.)</li>
+						<li>Greece, Denmark, Finland, and Ireland are the most diverse within Europe (having 5+
+							different categories in their Top-50 charts.)</li>
+						<li>Review the maps to pair your music with what each country has appreciated.</li>
+					</ul>
+					
+				<img src='images/projects/spotify/world_map_top50.png' 
+					alt='World Map of Top-50'
+					width='100%'>
+				<br><br>
+				
+				<p><b>Some limitations exist:</b></p>
+				<ul>
+					<li>This short timeframe in October may not be representative of a bigger picture.</li>
+					<li>Contextual references weren't studied but would have significant effect - 
+						like whether the track (or a cover thereof) was featured in a newly released movie or TV show.</li>
+					<li>Most of the trait data was derived from Spotify's algorithms; how completely and accurately do these
+						derivations describe songs?</li>
+				</ul>
+				
+				<h2>Reflection</h2>
+				<p>We could extract even more value by going deeper than a high-level music industry trend.
+				We already have a few general insights for musicians - why not pivot the objective and help
+				them more specifically? New opportunities to <b>enhance their user experience</b> emerge as we 
+				anticipate their needs and new questions:</p>
+				
+				<ul><li>Using data <b>we already have:</b></li>
+					<ul><li>Convert the static faceted maps into a filterable and interactive dashboard that can be zoomed in</li>
+						<li>Add a scrollable pop-up hover effect revealing the Top-50 of each country
+					</ul>
+					<li>What we can do or answer with data <b>we don't yet have:</b></li>
+					<ul><li>If ['my'] song achieves Top-50 status, how can I expect ['my'] other song popularities to be impacted?</li>
+						<li>How similar is ['my'] song compared to those on the charts? Which countries would appreciate ['my'] music?</li>
+						<li>Be able to play the Top-5 per country (or Top-10; expand the list if there's good reception) right from the dashboard pop-up</li>
+						<li>Add album cover images to the pop-up for easier recognizability of the artists</li>
+						<li>If a Top-50 song originates in i.e. the US, where and how quickly does it spread?</li>
+					</ul>
+				</ul>
+						
+			</div> <!-- End Findings -->
+		
+			
+	</div>
+	</section>
+	</main>
+	
+	<div id='footer'></div>
+	
+<!-- JavaScript to pull navbar and contact footer data -->
+<script>
+	// Bootstrap should only initialize AFTER the header and footer fully load, to ensure hamburger function.
+	fetch('navbar.html')
+		.then(response => response.text())
+		.then(data => {
+			document.getElementById("header").innerHTML = data;
+			
+			//Now reinitialize bootstrap
+			const script = document.createElement('script');
+			script.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js';
+			script.defer = true;
+			document.body.appendChild(script);
+		});
+		
+	fetch('footer.html')
+		.then(response => response.text())
+		.then(data => document.getElementById('footer').innerHTML = data);
+</script>
+	
+	
+</body>

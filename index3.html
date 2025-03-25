@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chad Gray Portfolio</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="project_style.css"> <!-- reference the master styling -->
+  
+  <style>  
+    /* Custom styles for the About section */
+    #about {
+      padding: 80px 0 40px;
+	  background: rgba(151, 223, 210, 1);
+    }
+    .about-avatar {
+      width: 250px;
+      height: 250px;
+      object-fit: cover;
+	  border-radius: 50%;
+      border: 3px solid #333;
+    }	
+  </style>
+</head>
+
+
+
+<body>
+
+	<!-- Nav Bar -->
+	<div id='header'></div>
+
+  <!-- About Section -->
+  <section id="about">
+    <div class="container">
+      <!-- Large centered headline -->
+      <h1 class="text-center mb-4">Chad Gray</h1>
+	  <p class="style-line">_____________</p>
+	  <p></p>
+	  <h2 class='text-center'>Harnessing data to <b>empower people</b> and help them do what they do best.</h2>
+	  
+	  <p class="style-line">__________________</p>
+	  <br><br>
+	  <div class="row align-items-center">
+	  
+		  <!-- Profile pic and icons on left -->
+		  <div class="col-md-4 text-center"> <!-- text-md-left -->
+			  <img
+				src="images/about/profile-leaves-crop2.png"
+				alt="Profile Picture"
+				class="about-avatar"
+			  />
+		  
+		  <!-- Contact icons (linkedin and email) -->
+			  <div class='about-icons'>
+				<a href='https://www.linkedin.com/in/chad-gray-55aaa251/' target='_blank'>
+					<img src='icons/linkedin.png' alt='linkedin'>
+				</a>
+				<a href='mailto:chadgray@buffalo.edu'>
+					<img src='icons/envelope4.png' alt='email'>
+				</a>
+			  </div>
+		  </div>
+      
+		  <!-- Text on right -->
+		  <div class="about-text">
+			<p>Hi, I'm Chad.</p>
+			<p>I'm a well-rounded data professional (2+ years Data Science,
+			  10+ years Business Analysis) seeking a <b>Data Scientist</b> role (full-time, remote)
+			  focused on <b>improving functions, experiences, and morale.</b></p>
+			<p>
+			  More specifically, my current specialties include:
+			  <ul class="text-left" style="list-style-position: inside;">
+				  <li> <b>Complete analyses</b> (planning > collection > processing > EDA > modeling > tooling and/or visualization)
+				    that lead to <b>"eureka!"</b> moments and recommendations</li>
+				  <li> <b>Dashboards</b> that protect people against risk and support their goals </li>
+				  <li> <b>Automation tools</b> with or without <b>machine learning</b>-based outputs
+				  that minimize time dedicated to mundane, robotic tasks </li>
+			  </ul>
+			</p>	  
+			<p>Throughout my career, my managers and teammates have trusted me to help navigate some of their
+			  toughest challenges. I credit my curious disposition, growth mindset, and active listening skills for
+			  being able to exceed their expectations.</p>
+			
+			<p>Don't just take my word for it. The proof is in the pudding.</p>
+		  </div>
+	  </div>
+    </div>
+  </section>
+
+
+
+
+
+
+ <section id="projects">
+    <div class="container text-center">
+      <!-- Centered heading for the Projects section -->
+      <h1 class="mb-3">Project Pudding</h1>
+      
+	    <div class="content">
+			<p>A subset of work highlighting machine learning, automation, tooling, and data visualization skills.</p>
+	    </div>
+		
+      <!-- Bootstrap row for project cards -->
+      <div class="row justify-content-center">
+        
+
+		
+		
+		
+		<!-- 4th Project Card -->
+        <div class="col-md-4 mb-4">
+		<a href='music_maps.html' class='text-decoration-none text-reset'> <!-- new add for hover -->
+          <div class="card h-100">
+			<div class='card-img-container'> <!-- new add for hover -->
+				<img
+				  src="images/projects/spotify/cover.png"
+				  class="card-img-top"
+				  alt="Spotify Music"
+				/>
+				<div class='overlay'></div> <!-- new add for hover -->
+			</div> <!-- this here ensures the overlay only pertains to the image -->
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Music Maps</h5>
+              <p class="card-text">
+			    Unsupervised machine learning via clustering and association rules
+				are used to assess the diversity of global music
+				on Spotify's "Top 50" hits per country in October, 2023.
+              </p>
+				<div class="mt-auto">tags:
+				  <span class="skill-box">R</span>
+				  <span class="skill-box">Machine Learning</span>
+				  <span class="skill-box">Maps</span>
+				</div>
+              </div>
+            </div>
+		</a>
+        </div>
+		
+		
+		<!-- 5th Project Card -->
+        <div class="col-md-4 mb-4">
+		<a href='airline_fare_maps.html' class='text-decoration-none text-reset'> <!-- new add for hover -->
+          <div class="card h-100">
+			<div class='card-img-container'>
+				<img
+				  src="images/projects/airline_network/cover.jpg"
+				  class="card-img-top"
+				  alt="Airline Fare Changes (map)"
+				/>
+				<!-- <div class='overlay'></div> --> <!-- new add for hover effect -->
+			</div> <!-- this here ensures the overlay only pertains to the image -->
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Airline Fare Maps</h5>
+              <p class="card-text">								
+                Social network analysis is applied to US airports and their average fares, 
+				yielding insights into competitive airline pricing strategies. 
+				Interactive visualizations (maps, alluvial diagrams) allow for broad and drill-down analysis.
+              </p>
+				<div class="mt-auto">tags:
+				  <span class="skill-box">R</span>
+				  <span class="skill-box">Maps</span>
+				  <span class="skill-box">Interactive Viz's</span>
+				</div>
+              </div>
+            </div>
+		</a>
+        </div>
+		
+		
+		<!-- 6th Project Card -->
+        <div class="col-md-4 mb-4">
+		<a href='airline_survey_results.html' class='text-decoration-none text-reset'> <!-- new add for hover -->
+          <div class="card h-100">
+			<div class='card-img-container'> <!-- new add for hover -->
+				<img
+				  src="images/projects/airline_nlp/cover2.jpg"
+				  class="card-img-top"
+				  alt="Airline Survey Reviews"
+				/>
+				<!-- <div class='overlay'></div> <!-- new add for hover -->
+			</div> <!-- this here ensures the overlay only pertains to the image -->
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Airline Survey Results</h5>
+              <p class="card-text">
+                Text and sentiment analyses come to the rescue to condense thousands of survey results
+				containing numerical and commented feedback into insights. What do airline passengers cherish or hate
+				most, and how do these Eurasian providers deliver?
+              </p>
+				<div class="mt-auto">tags:
+				  <span class="skill-box">R</span>
+				  <span class="skill-box">NLP</span>
+				  <span class="skill-box">Sentiment Analysis</span>
+				</div>
+            </div>
+			  
+			  
+          </div>
+		</a>
+        </div>
+		
+		
+		
+				<!-- First Project Card -->
+        <div class="col-md-4 mb-4">
+			<!-- <a href=https://example.com/project1" class="text-decoration-none text-reset"> <!-- clickable card. Edit link. -->
+			  <div class="card no-hover h-100">
+				  <div class="card-img-container"> <!-- src="images/projects/risk_prediction/cover.jpg" -->
+					<img
+					  src="images/projects/under_construction2.jpg"
+					  class="card-img-top"
+					  alt="Eureka! Risk Prediction"
+					/>
+					<!-- <div class="overlay"></div> -->
+				  </div>
+				<div class="card-body d-flex flex-column">
+				  <h5 class="card-title">Eureka! Risk Prediction</h5>
+				  <p class="card-text">
+				  <b>Coming soon!</b>
+				  
+					Predictive modeling and analysis offers new insights and proactive risk classification for student failure risk,
+					which has persisted despite implementing solutions that have worked for other universities.
+				  </p>
+				  <!-- Button links at the bottom -->
+				  <!-- <div class="mt-auto"> -->
+					<!-- replace href="#" with the actual URL -->
+					<!-- change the class to customize button, i.e. btn-info, btn-success -->
+					<!-- <a href="#" class="btn btn-primary">Blog Post</a> -->
+					<!-- <a href="#" class="btn btn-secondary">Source Code</a> -->
+					
+					<!-- Skill textboxes -->
+					<div class="mt-auto">tags:
+					  <span class="skill-box">R</span>
+					  <span class="skill-box">Machine Learning</span>
+					</div>
+					
+				</div>
+			  </div>
+			<!-- </a> -->
+        </div>
+        
+        <!-- Second Project Card -->
+        <div class="col-md-4 mb-4">
+		<!-- <a href='https://example.com/project2' class='text-decoration-none text-reset'> <!-- new add for hover -->
+          <div class="card no-hover h-100">
+			<div class='card-img-container'> <!-- new add for hover src="images/projects/dashboard_tbd/under_construction.jpg" --> 
+				<img
+				  src="images/projects/under_construction2.jpg"
+				  class="card-img-top"
+				  alt="Coming Soon! Education Dashboard"
+				/>
+				<!-- <div class='overlay'></div> <!-- new add for hover -->
+			</div> <!-- this here ensures the overlay only pertains to the image -->
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Class Performance Dashboard</h5>
+              <p class="card-text">
+                <b>Coming soon!</b>
+				A Power BI dashboard supporting overall KPI monitoring,
+				grade distributions, and other professor-requested elements with the ability
+				to drill down to the student level.
+              </p>
+				<div class="mt-auto">tags:
+				  <span class="skill-box">Power BI</span>
+				  <span class="skill-box">Interactive Viz's</span>
+				</div>
+              </div>
+            </div>
+		<!-- </a> -->
+        </div>
+        
+        
+        <!-- Third Project Card -->
+        <div class="col-md-4 mb-4">
+		<!-- <a href='https://example.com/project3' class='text-decoration-none text-reset'> -->
+          <div class="card no-hover h-100">
+		  <div class='card-img-container'> <!-- new add for hover src="images/projects/scheduler/cover.jpg"-->
+            <img
+			  src="images/projects/under_construction2.jpg"
+              class="card-img-top"
+              alt="Mr. Roboto Pt1: Personnel Scheduler"
+            />
+			<!-- <div class="overlay"></div> -->
+		  </div>
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">Mr. Roboto Part 1: Personnel Scheduler</h5>
+              <p class="card-text">
+			  <b>Coming soon!</b>
+			  
+                "It's my favorite time of year: scheduling!" said no one, ever. 
+				Unless they have linear programming to automate most of it!
+              </p>
+				 <!-- Skill textbox -->
+                <div class="mt-auto">tags:
+                  <span class="skill-box">Python</span>
+				  <span class="skill-box">Jupyter Notebook</span>
+				  <span class="skill-box">Excel</span>
+                </div>
+				
+              </div>
+          </div>
+		  <!-- </a> -->
+        </div>
+		
+	</div><!-- End of row -->
+	</div><!-- End of container -->
+ </section>
+ 
+ 
+ <!-- contact information -->
+ <div id='footer'></div>
+ 
+<!-- JavaScript to pull navbar and contact footer data -->
+<script>
+	// Bootstrap should only initialize AFTER the header and footer fully load, to ensure hamburger function.
+	fetch('navbar.html')
+		.then(response => response.text())
+		.then(data => {
+			document.getElementById("header").innerHTML = data;
+			
+			//Now reinitialize bootstrap
+			const script = document.createElement('script');
+			script.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js';
+			script.defer = true;
+			document.body.appendChild(script);
+		});
+		
+	fetch('footer.html')
+		.then(response => response.text())
+		.then(data => document.getElementById('footer').innerHTML = data);
+</script>
+
+</body>
+</html>

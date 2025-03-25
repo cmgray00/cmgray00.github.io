@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project: Airline Fare Maps</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  
+  <link rel="stylesheet" href="project_style.css"> <!-- reference the master styling -->
+</head>
+
+
+<body>
+
+	<div id='header'></div>
+	
+	<main>
+	
+	<section id='project'>
+	<div class="container text-left mb-4"> <!-- container of containers -->
+		
+		  <!-- Content before sankey -->
+		  <div class="container-md mb-4">
+			  <p>April, 2024</p>
+			  <h1 class="mb-3">Have Airlines "Bounced Back" from COVID-19?</h1>
+				<p>An independent project toward the end of graduate school, the primary objective was to introduce 
+				social network analysis and how to visualize it. Peer review yielded feedback on visuals for a round
+				of improvements. With "
+				<a href='/music_maps.html'
+							   target="_blank" 
+							   rel="noopener noreferrer"
+							   class='weblink'>Music Maps</a>
+				" project reflections in mind, 
+				I took this opportunity to experiment with interactive visuals.</p>
+				<div class="content">
+					<h2>Introduction</h2>
+					
+					<p>About 2.9M passengers fly in and out of US airports daily (Federal Aviation Administration, 2023).
+					To manage such a feat, airports must manage carefully timed schedules, monitor several variables 
+					(plane maintenance, weather, and air traffic to name a few), and rapidly determine alternative plans 
+					due to poor planning and/or luck. COVID-19 was a particularly difficult time for the flight industry, 
+					considering travel bans and extended fear of social gatherings.</p>
+					
+					<p>We review whether the flight industry has “bounced back” to pre-COVID performance by comparing
+					2018 and 2023 average fare data. A network analysis supports investigation of the driving cause(s)
+					of fare changes. Marketing carriers glean insights into other carriers’ strategies.</p>
+				</div>
+			 
+			<!-- About the Data and its accompanying viz --> 
+
+			  <h2 class="mb-3">About the Data</h2>
+				<div class="content">
+					<p>Two data sources were analyzed while two others supported visualization:</p>
+					
+					<ul><li>Data for analysis, via the Bureau of Transportation Statistics:</li>
+						<ol><li>
+							<a href='https://www.transtats.bts.gov/DL_SelectFields.aspx?gnoyr_VQ=FGK&QO_fu146_anzr=b0-gvzr'
+							   target="_blank" 
+							   rel="noopener noreferrer"
+							   class='weblink'>Marketing Carrier On-Time Performance</a>
+							- US-based passenger flight data provided by US certified air carriers. These carriers account for 
+							at least 1% of domestic scheduled passenger revenues.</li>
+							<li>
+								<a href='https://www.transtats.bts.gov/AverageFare/'
+									target="_blank" 
+									rel="noopener noreferrer"
+									class='weblink'>Airline Origin & Destination Survey of DB1B Coupons</a> 
+								- Summarization of the 10% sample of fares paid, excluding fees (i.e. baggage fees) 
+								paid after initial ticket purchase.</li>
+						</ol>
+						<li>Data for visualization:</li>
+							<ul><li>
+								<a href='https://www.census.gov/cgi-bin/geo/shapefiles/index.php'
+								   target="_blank" 
+								   rel="noopener noreferrer"
+								   class='weblink'>Geography Division (2024)</a>
+								- TIGER/Line® shape files to plot US states</li>
+								<li>Google Maps and Wikipedia for city and/or airport coordinates</li>
+							</ul>
+					</ul>
+					
+					<p>Each month of source 1 contained between 600k and 702k flight records, necessitating a
+						more targeted analysis. Source 2 was used to do so by exploring the most drastic changes
+						in average fares per airport over time.</p>
+						
+					<p>Source 2 was formatted into quarters. Quarter 3 of 2018 and 2023 were chosen
+					to sandwich COVID-19 inside the latest available data. Quarter 3 runs from July 1 
+					through September 30. Ultimately, carrier-airport conclusions were confined 
+					to September to hasten results from visualization algorithms.</p>
+				</div>
+
+				
+			  <h2 class='mb-3'>Findings, <i>in a nutshell</i></h2>
+				<div class="content">
+					<p>Exploratory data analysis revealed that, in the sample data overall, each airport's average
+					fares in 2023 were cheaper than they were 5 years ago (even after adjusting for inflation):</p>
+					
+					<div class='row align-items-end'>
+						<div class='col-md mb-4'>
+							<i>Original visual</i><br>
+							<i>Peer feedback reflected non-traditional barplot use and desire for summarizational numerics...</i>
+							<img src='images/projects/airline_network/eda_avg_airport_fare_diff.jpg' 
+								 alt='Original EDA average fare differences per airport'
+								 width='100%'>
+						</div>
+						<div class='col-md mb-4'>
+							<i>Updated visual</i><br>
+							<i>...so I used a violin plot to emphasize the "drooping" average fare distribution</i>
+							<img src='images/projects/airline_network/eda_avg_airport_fare_diff_post_feedback.jpg' 
+								 alt='Updated EDA average fare differences per airport'
+								 width='100%'>
+						</div>
+					</div>
+					
+					<p>Most airports with significant average fare increases (>= $200) were balanced by significant airport
+						fare reductions in another part of the state:</p>
+					
+					<div class="row align-items-center"> <!-- the row -->
+						<!-- Pre-feedback side by side with post-feedback state balance viz -->
+						<div class="col-md mb-4">
+							<i>Original visual</i><br>
+							<i>Peer feedback indicated unclear state-fare pairings and incomplete state list...</i>
+							<img src='images/projects/airline_network/eda_state_balance_pre_feedback.jpg' 
+								 alt='Original visual of balancing increases with decreases'
+								 width='100%'>
+						</div>
+						<div class="col-md mb-4">
+							<i>Updated visual</i><br>
+							<i>...so I refocused my message and added space between the bars.</i>
+							<img src='images/projects/airline_network/eda_state_balance_post_feedback.jpg' 
+								 alt='Updated visual of balancing increases with decreases'
+								 width='100%'>
+						</div>
+					</div> <!-- end viz comparison -->
+					
+					<p>No geographical patterns regarding significant change airports were found, although a "slanted sandwich" 
+					pattern appears state-wise (see below.) Passengers should avoid Utah if possible, while Iowa, Colorado,
+					Louisiana, Mississippi, and Alabama offer great discounts:</p>
+					
+					<i>Interact with me!</i> Point for details; click and drag to move across the map; scroll to zoom.
+					<div class="container-md justify-left">
+						<iframe src="images/projects/airline_network/map.html" 
+						width="780px" height='768px' frameborder='0' scrolling='no';></iframe>
+					</div>
+					<br>
+					<p>A budding theory comes to mind when we see Colorado; budget airline Frontier is headquartered there. Are 
+					budget airlines shaking things up at each of the signficant fare change airports? The following interactive 
+					sankey diagram allows the user to compare marketing carrier distributions for each of those airports:</p>
+				
+				</div>
+				</div> <!-- End narrower alignment -->
+
+				
+				<i>Interact with me <b>on a desktop (wide screen)</b> by hovering over text or bars!</i>
+				Green airports experienced significantly reduced average airfares, while orange ones exhibited significant increases
+				by 2023.
+				<div class='container-fluid align-items-center'>
+					<iframe src="images/projects/airline_network/sankey2.html" 
+					left='100px' width='1500px' height='700px' scrolling='no';></iframe>
+				</div>
+				<p><i>* Recall per the data source, these marketing carriers have at least 1% revenue. 
+				Anyone making less would not appear.</i></p>
+				
+			<div class='container-md mb-4'>
+				<p><b>A few highlights</b> demonstrate how the diagram can be explored for insights:</p>
+					<ul>
+						<li>Contrary to our theory, only 5/21 significant change airports (DBQ, DUT, EAU, HVN, OWB) were explained by
+							an unknown smaller airline overtake (having less than 1% revenue).
+							<ul><li>See the 2023 pattern of an unknown marketing carrier overtake by hovering over i.e. DBQ.</li></ul>
+						<li>These overtakes weren't always reductions. Among the 5, DUT managed to charge significantly more.
+							<ul><li>Notice that DUT is colored orange - meaning a significant increase in 2023 relative to 2018.</li></ul>
+						<li>Significant fare increases are more common when there's a marketing airline monopoly.
+							<ul><li>Seen by comparing the proportion of all single-ribbon (monopoly) fare changes in 2023 that
+							are colored orange (increases; 2/8 as PRC and SPN) versus the proportion of multi-ribbon fare changes 
+							in 2023 that are colored orange (0/7).</li></ul>
+						<li>New Southwest Airlines competition was responsible for the CO-based savings. 
+							<ul><li>Seen by hovering over each CO airport. Alternatively, hovering over Southwest Airlines Co. shows their 
+							0% to 2.6% flight prevalence among the significant change airports, with equal flight frequencies for 
+							the two	locations.</li></ul>
+						<li>Alaska Airlines and Allegiant Air are moving away from these highly
+							competitive airports.
+							<ul><li>Seen by comparing the marketing carrier percentages across years without 
+							hovering over any content. Alaska Airlines has gone from 2.9% to 0.4% of flights here.</li></ul>
+					</ul>
+				
+				<p><b>Some strong limitations exist:</b></p>
+				<ul>
+					<li>We don't know <b>anything</b> about the data sampling methodology pertaining to fares paid. 
+						Insights related to fares should therefore be taken with a grain of salt.</li>
+					<li>Even if data sampling was representative, the short timeframe findings may not apply to a full year.</li>
+					<li>Fares discussed are only "base" fares, but "base" is not the same for everyone. For instance, Frontier's
+						base fare lacks an overhead carry-on bag, while (at the time of writing) American Airlines built this
+						expense into their base. Comparing fares is thus compromised, and we cannot answer definitively whether
+						airlines have fully recovered from COVID-19.</li>
+				</ul>
+				
+				<h2>Reflection</h2>
+				<p>The sankey diagram is suited for users who wish to explore and dig manually - as specialists in their field.
+				Some search themes would likely emerge for those specialists.
+				For an enhanced user experience, <b>the next phase</b> would demonstrate thematic insights with less effort. 
+				A dashboard would feature a more traditional network diagram above the sankey, and be based on the existing map 
+				(where nodes represent airports, positioned at their geographical coordinates.)
+				New lines connect the airports that have flights between them (called "edges.")
+				
+				<ul><li>Clicking on a Marketing Airline (American Airlines, etc...) filter would reveal their network coverage.</li>
+					<li>Clicking on an airport would emphasize just that airport's connections.</li>
+					<li>Each edge could be colored by the Marketing Airline or by dynamic value thresholds (read onward.)</li>
+					<li>Sizing edges by different features would be appealing to different audiences and questions. This is especially
+						valuable to compare the competition.</li>
+					<ul><li>If sizing by average fare, passengers could see the cheapest destinations and airlines out of their local airport.</li>
+						<li>If sizing by average fare per mile, both airlines and passengers can assess "fare fairness."</li>
+						<li>If sizing by average delay, both airlines and passengers once again compare the competition and consider 
+						where to make upgrades or which alternative carrier could offer the smoothest travel plan.</li>
+					</ul>
+				</ul></p>
+				
+				<p><b>Creative challenges exist for this phase:</b>
+				<ul><li>Edges aren't always drawn in the aesthetically preferred direction (across v. around the globe),
+						although solutions exist</li>
+					<li>Segmenting an edge into categories isn't something I've seen before, but I have some ideas...</li>
+				</ul></p>
+				
+				<p><b>Keeping an open mind</b> and <b>being playful with constructive criticism</b> led to further 
+				experimentation	and more intimate knowledge about tweaking parameters in graphing libraries. My preferences
+				for specific libraries based on graph type became more complex.</p>
+				
+				<p>Our class didn't know R could produce interactive visuals. In light of relatively sparse change requests and
+				an abundance of questions about how I made the map, I created a tutorial.</p>
+						
+			</div> <!-- End Findings -->
+		
+			
+	</div>
+	</section>
+	</main>
+	
+	<div id='footer'></div>
+	
+	<!-- JavaScript to pull navbar and contact footer data -->
+	<script>
+		// Bootstrap should only initialize AFTER the header and footer fully load, to ensure hamburger function.
+		fetch('navbar.html')
+			.then(response => response.text())
+			.then(data => {
+				document.getElementById("header").innerHTML = data;
+				
+				//Now reinitialize bootstrap
+				const script = document.createElement('script');
+				script.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js';
+				script.defer = true;
+				document.body.appendChild(script);
+			});
+			
+		fetch('footer.html')
+			.then(response => response.text())
+			.then(data => document.getElementById('footer').innerHTML = data);
+	</script>
+	
+</body>

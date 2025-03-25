@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project: Airline Survey NLP</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  
+  <link rel="stylesheet" href="project_style.css"> <!-- reference the master styling -->
+  
+  <style>
+	.image-comparison {
+	  /* max-width: 100%; */
+	  width: 100%;
+	  margin-bottom: 2rem;
+	  overflow: hidden;
+	}
+	.image-comparison img {
+	  width: 100%;
+	  height: 100%;
+	  object-fit: cover;
+	  object-position: left;
+	}
+	.image-comparison .images-container {
+	  position: relative;
+	  display: inline-block;
+	}
+	.image-comparison .images-container .before-image {
+	  position: absolute;
+	  top: 0;
+	  width: 40%; /* default position of slider */
+	}
+	.image-comparison .slider {
+	  position: absolute;
+	  inset: 0;
+	  width: 100%;
+	  cursor: ew-resize;
+	  opacity: 0; /* we want our own slider, so hide this */
+	  z-index: 4;
+	}
+	.image-comparison .slider-line {
+	  position: absolute;
+	  top: 8.25%;
+	  bottom: 11%;
+	  width: 6px;
+	  background: #000;
+	  left: 40%;
+	  transform: translateX(-50%); /* an adjustment to get the line exactly in center */
+	  z-index: 4;
+	}
+	.image-comparison .slider-icon {
+	  position: absolute;
+	  left: 40%;
+	  top: 50%;
+	  width: 60px;
+	  height: 60px;
+	  color: #000;
+	  transform: translate(-50%, -50%) rotateZ(90deg);
+	  z-index: 4;
+	}
+  </style>
+
+</head>
+
+
+<body>
+
+	<div id='header'></div>
+	
+	<main>
+	
+	<section id='project'>
+	<div class="container-fluid text-left mb-4"> <!-- container of containers -->
+
+		  <div class="container-md mb-4">
+			  <p>April, 2024</p>
+			  <h1 class="mb-3">Survey Results: What Eurasian Airline Passengers Care About</h1>
+				<p>An independent project toward the end of graduate school, the primary objective was to introduce 
+				natural language processing (NLP) techniques via sentiment and textual analyses, 
+				and how to visualize them. Peer reviews prompted improvements to visuals.</p>
+				<div class="content">
+					<h2>Introduction</h2>
+					
+					<p>Airlines run incredibly large businesses, each typically transporting several millions of 
+					passengers annually. While the number of reviews by flyers is not remotely close to these levels,
+					digesting and translating voluminous feedback into status and corrective actions is critical for 
+					continued business and growth.</p>
+					
+					<p>R was used to process numerical and textual feedback to identify the strengths and weaknesses 
+					of the best and worst airlines in a sample of flight reviews for a few Eurasian-based airlines. Text 
+					analysis was lexicon-based, including unigram frequency and polarity-based sentiment analysis. 
+					These techniques identified what was associated with a passenger's recommendation more specifically
+					than numerical rating buckets could.</p>
+				</div>
+			 
+			<!-- About the Data --> 
+			  <h2 class="mb-3">About the Data</h2>
+				<div class="content">
+					<p>A sample of Skytrax data from 
+						<a href='https://www.gigasheet.com/sample-data/airline-reviews-datasetcsv'
+							target="_blank" 
+							rel="noopener noreferrer"
+							class='weblink'>Gigasheet</a>
+					details 8,100 flight reviews posted between March 22, 2016 and March 6, 2024.
+					The reviews are spread across ten different airlines that are European or Asian-based.</p>
+					
+					<p>The feedback form can be seen  
+						<a href='https://www.airlinequality.com/write-a-review/?type=airline'
+							target='_blank'
+							rel='noopener noreferrer'
+							class='weblink'>here.</a>
+					</p>
+				</div>
+
+			<!-- Findings -->
+			  <h2 class='mb-3'>Findings, <i>in a nutshell</i></h2>
+				<!-- <div class="content"> -->
+					<p>The survey's numerical scales are currently suffering from some misinterpretation. For example,
+					some passengers rated an airline experience 10/10, yet would not recommend the airline to others:</p>
+					
+					<i>Move the <|> slider to see how feedback influenced the final visual.<br>
+					   The original grayscale was too distracting; try to emphasize only the "culprit" portions.</i> 					
+					<div class="image-comparison">
+					  <div class="images-container">
+						<img 
+							class='before-image'
+							src="images/projects/airline_nlp/ratings_v_recommendations_orig.jpg" 
+							alt='before'
+							width="100%" height='100%'>
+						<img 
+							class='after-image'
+							src="images/projects/airline_nlp/ratings_v_recommendations_new.jpg" 
+							alt='after'
+							width="100%" height='100%'>
+							
+						<div class='slider-line'></div>
+						<div class='slider-icon'>
+						  <svg 
+							xmlns="http://www.w3.org/2000/svg" 
+							fill="none" 
+							viewBox="0 0 24 24" 
+							stroke-width="1.5" 
+							stroke="currentColor" 
+							class="size-6">
+							<path 
+								stroke-linecap="round" 
+								stroke-linejoin="round" 
+								d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" 
+							/>
+						  </svg>
+						</div>
+						
+						<input type='range' class='slider' min='0' max='100' />
+						
+					  </div>
+					</div>
+					
+					<p>A minor update to the survey that clarifies how the numerical scales map to "good" or "bad"
+						performance would alleviate about half of the extremist malignments pertaining to the 
+						Overall Rating. Without NLP techniques, this wouldn't be discovered - let alone quantifiable.</p>
+
+					<p>Most other malignments were difficult to explain because a passenger's written feedback 
+					included roughly equivalent records of positive and negative experiences. Indeed, there were
+					rare instances of overwhelmingly positive commentary paired with "not recommended" conclusions. 
+					Thus:
+						<ul><li>Different passengers have different weights - or values - of specific services.</li>
+							<li>Written reviews don't always allow for an accurate assessment of that weighting.</li>
+							<li>We can't expect perfect translations between commentary and numerical scales.</ul>
+					
+					<p>Nevertheless, we can extract considerable meaning from common feedback and compare it to the scales.
+					   An impressively strong Pearson's correlation coefficient of 0.88 between "value for the money" and 
+					   "overall rating" highlights our need to identify passenger "values." 
+					   All Nippon Airways emerges as the competition to beat, and Turkish Airlines 
+					   as the operator to avoid: </p>
+					
+					<div class='container-md mb-3'>
+						<img src='images/projects/airline_nlp/5p_hedonic.jpg'
+							alt='5-point hedonic scale'
+							width='700px'
+						>
+					</div>
+					
+					<p>Reviews are time-sensitive. We look for up-to-date and consistent feedback for the 
+					clearest takeaways:</p>
+					
+					<div class='container-md mb-3'>
+						<img src='images/projects/airline_nlp/time_sensitivity.jpg'
+							alt='Timespan for feedback'
+						>
+					</div>
+					
+					<p>Unfortunately for Turkish Airlines, their problems started well before COVID-19. They haven't
+					   recovered from the pandemic, either. We must be careful about pulling too much feedback 
+					   from peak pandemic days, because such an irregular event likely caused woes that no longer exist. 
+					   To stay current and consistent, we assess reviews about flights conducted March 2023-2024.</p>
+					   
+					<p>So, what is "value" in "a good value for the money"? What are these passengers talking about most?</p>
+					
+					<div class="row align-items-end"> <!-- the row -->
+						<!-- Pre-feedback side by side with post-feedback state balance viz -->
+						<div class="col-md mb-3">
+							<b><i>ANA reviews</i></b>
+							<i>emphasize good timing, comfort, sustenance, and attentive cabin crew - largely explaining
+							their first-place ranking among sampled airlines</i><br>
+							<img src='images/projects/airline_nlp/ana_network.jpg' 
+								 alt='ANA network diagram of unigrams'>
+						</div>
+						<div class="col-md mb-3">
+							<b><i>Turkish Airline reviews</i></b>
+							<i>emphasize poor timeliness, communication, baggage traceability, and missed connection issues - 
+							largely explaining their last-place ranking among sampled airlines</i><br>
+							<img src='images/projects/airline_nlp/ta_network.jpg' 
+								 alt='Updated visual of balancing increases with decreases'>
+						</div>
+					</div>
+					
+					<p>These insights generally par with unigram, polarity-based sentiment analysis results:</p>
+					
+					<div class='container-md mb-3'>
+						<img src='images/projects/airline_nlp/cover.png' 
+							 alt='Sentiment Analysis Wordclouds'
+							 width='700px'>
+					</div>
+					
+					<p>An <b>important limitation</b> of unigram word clouds is their potential for poor accuracy.
+					For example, "recommend" has a positive connotation on its own, but any context like "not recommend"
+					(a bigram) isn't captured. A thorough, manual review prompted by the network diagrams and word 
+					cloud results contributed to the confident narrative here, even if the positive elements of TK (Turkish 
+					Airlines) require some tweaking.</p>
+					
+					<p><b>In conclusion</b>, time really is money. Passengers appreciate and recommend airlines
+					that respect their time with polite efficiency. If that can’t happen, they expect an empathetic 
+					and helpful solution from the airline staff. Comfortable seats and great food are valued perks.</p>
+					
+					<p>Textual and sentiment analyses are <b>essential</b> tools to gather deeper insights from
+					mass quantities of reviews. They enhance the accuracy of purely numerical rating scales.
+					Even with a standard lexicon, such analyses are effective in deriving key drivers of customer
+					satisfaction.</p>
+					
+				</div> <!-- End narrower alignment -->
+
+			<div class='container-md mb-4'>		
+				<h2>Reflection</h2>
+				<p>NLP became one of my favorite task types, in part because summarizing feedback is such a core business 
+				element, and in part because pre-processing quality is highly transparent in results.  
+				   For an introductory project, this was a nice preview into how complex yet rewarding NLP is.</p>
+				   
+				<p>Potential improvements aim to reduce the amount of manual validation performed:</p>
+				
+					<ul><li>explore entity/aspect-based sentiment analysis</li>
+						<li>explore bigrams, trigrams, etc. to ensure more accurate and complete meanings</li>
+						<li>better stemming and lemmatization - as evidenced in some repetitive word cloud results
+						(i.e. "disappointment" and "disappointed") </li>
+					</ul>
+						
+			</div> <!-- End Findings -->
+		
+			
+	</div>
+	</section>
+	</main>
+	
+	<div id='footer'></div>
+	
+
+	<!-- JS for sliders -->
+	<script>
+		const slider = document.querySelector('.image-comparison .slider');
+		const beforeImage = document.querySelector('.image-comparison .before-image');
+		const sliderLine = document.querySelector('.image-comparison .slider-line');
+		const sliderIcon = document.querySelector('.image-comparison .slider-icon');
+	  
+		slider.addEventListener('input', (e) => {
+			let sliderValue = e.target.value + '%';
+			
+			beforeImage.style.width = sliderValue;
+			sliderLine.style.left = sliderValue;
+			sliderIcon.style.left = sliderValue;
+		});
+	
+	</script>
+	
+	<!-- JS to pull navbar and contact footer data -->
+	<script>
+		// Bootstrap should only initialize AFTER the header and footer fully load, to ensure hamburger function.
+		fetch('navbar.html')
+			.then(response => response.text())
+			.then(data => {
+				document.getElementById("header").innerHTML = data;
+				
+				//Now reinitialize bootstrap
+				const script = document.createElement('script');
+				script.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js';
+				script.defer = true;
+				document.body.appendChild(script);
+			});
+			
+		fetch('footer.html')
+			.then(response => response.text())
+			.then(data => document.getElementById('footer').innerHTML = data);
+	</script>
+
+	
+</body>
