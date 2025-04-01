@@ -141,7 +141,10 @@
 					<i>Interact with me!</i> Point for details; click and drag to move across the map; scroll to zoom.
 					<div class="container-md justify-left">
 						<iframe src="images/projects/airline_network/map.html" 
-						width="780px" height='768px' frameborder='0' scrolling='no';></iframe>
+						width="780px" height='768px' frameborder='0'
+						style='overflow: hidden;'
+						onload="this.contentWindow.document.body.style.overflow = 'hidden';"></iframe> 
+						<!-- onwheel='disableScroll(event)' -->
 					</div>
 					<br>
 					<p>A budding theory comes to mind when we see Colorado; budget airline Frontier is headquartered there. Are 
@@ -236,6 +239,14 @@
 	</main>
 	
 	<div id='footer'></div>
+	
+	<!-- JS ensuring small screens don't scroll excessively when interacting with the leaflet map -->
+	<!-- <script>
+	function disableScroll(event) {
+		event.preventDefault();  // Stop default scrolling behavior
+	}
+	</script> -->
+
 	
 	<!-- JavaScript to pull navbar and contact footer data -->
 	<script>
