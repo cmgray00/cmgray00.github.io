@@ -21,192 +21,173 @@
 	<section id='project'>
 
     <div class="container text-left mb-4">
-		<p>December, 2024</p>
+		
 		<h1 class="mb-3">Risk Prediction in Higher Education with Machine Learning</h1>
-			<p>The finale of my MS Data Science degree was entitled "Identifying Key Student Attributes Associated 
-			with DFW Status Risk in a Developmental College Math Course." I delivered findings and tools to the client in
-			a few ways:</p>
+			<p>During my MS Data Science capstone, I'd designed and deployed this machine learning pipeline
+			to predict D/F/Withdrawal risk in developmental college math. Outputs enabled targeted interventions
+			and improved data-driven decision making in higher education.</p>
 			
-			<ol><li>A 1-page targeted highlights and suggestions e-mail</li>
-				<li>An 87-page (double-spaced, before references and appendices) paper for course and client</li>
-				<li>A findings presentation with Q&A session</li>
-				<li>A set of scripts automating course setup and certain maintenance tasks, with training session</li>
-				<li>A set of scripts stepping through extraction, cleansing, and modeling data for ongoing risk 
-					predictions, with commented instructions and SOP</li>
-				<li>The automated Excel output file containing predictions and contextual classification justifications.</li>
-			</ol>
+			<p><b>Deliverables included:</b>
+				<ol><li> A 1-page targeted highlights and suggestions e-mail</li>
+					<li> An 87-page (double-spaced, before references and appendices) paper for course and client</li>
+					<li> A findings presentation with Q&A session</li>
+					<li> A set of scripts automating course setup and certain maintenance tasks, with training session</li>
+					<li> A set of scripts stepping through extraction, cleansing, and modeling data for ongoing risk 
+						predictions, with commented instructions and SOP</li>
+					<li> The Excel output file containing predictions and justifications</li>
+				</ol>
+			</p>
 			
-			<p>I'm selective about sharing the findings, but supplement some interesting pre-processing 
-			steps not normally featured on this portfolio.</p>
+			<p>I selectively share highlights from the findings while featuring interesting pre-processing 
+			steps not typically included on this portfolio.</p>
+
+			<p>In the end, logistic regression achieved 87.9% accuracy with an 89.5 F1-score using 
+			repeated cross-validation (100× 5-fold). It balanced outputs across demographics, reducing bias
+			while retaining predictive power.</p>
 			
 		<h2 class='mb-3'>Introduction</h2>
 				
-			<p>Developmental math courses in college boost a student’s math skills from pre-college to college level.
-			Such courses have been suffering from high rates of students getting D’s, F’s, or Withdrawing beyond a course
-			drop deadline (known as the DFW rate) across most US universities.</p>
+			<p>Developmental math courses help bridge the gap between pre-college and college-level math skills.
+			Across most U.S. universities, these courses have long struggled with <b>high D/F/Withdrawal (DFW) rates</b>, 
+			where students earn poor grades or withdraw after the drop deadline.</p>
 			
-			<p>The client has already implemented the most promising solutions per literature-based studies over the years, 
-			yet the high rates persist. This has implications for delaying – sometimes indefinitely – 
-			a student from graduating and becoming part of the work force in the way they desire.</p>
+			<p><b>Despite evidence-based changes</b> implemented by the client over several years, high DFW rates persisted. 
+			This has serious consequences: delaying (sometimes indefinitely) a student’s graduation and entrance into the workforce.</p>
 
-			<p>The motivation for this paper was to understand what drives DFW risk <i>here</i>,
-			and to create an early risk prediction alert tool to support proactive student interventions
-			in future semesters.</p>
+			<p><b>Project motivation:</b> Understand what drives DFW risk <i>at this institution</i> and create an 
+			<b>early risk prediction alert tool</b> to support proactive interventions in future semesters.</p>
 			
 		<h2 class='mb-3'>About the Data</h2>
-			<p>Canvas LMS APIs were leveraged to pull time- and score-based course performance data.
-			To ensure findings would be current and consistent, data from Fall 2022 to Spring 2024 inclusive was used.</p>
+			<p><b>Course performance data</b> was collected via Canvas LMS APIs, capturing time- and score-based records.
+			The dataset spans <b>Fall 2022 through Spring 2024</b> to ensure consistency and relevance.</p>
 			
-			<p>Attendance data usually included datetime clock punches downloadable as an Excel file. Ideally, a student punched in 
-			and out once per date - but mistakes were frequent and required a combination of cleansing and decision-making to 
-			aptly define a student's presence.</p>
-			
-			<p>Demographic data was derived from two sources. First, the university’s Registrar team provided some records 
-			after extensive controls for FERPA compliance. Second, the course catalogue website and professor feedback was used 
-			to create a new dataset	classifying academic plans (i.e. a BA in Geospatial Analysis and Technology) in different ways
-			(STEM field, relative math requirements, etc.)</p>
-			
-			<p>Client conversations and learnings from a literature review informed <b>extensive</b> data pre-processing steps
-			and feature engineering. These steps homogenized data meaning over time, and extracted more data value by quantifying 
-			student studying behaviors. Examples included short- and long-term perspectives on weekly assessment preparedness 
-			and homework cramming.</p>
+			<p><b>Attendance data</b> came from Excel downloads of clock punch timestamps. Ideally, students clocked in and out 
+			once per date — but frequent errors required thoughtful <b>data cleansing and decision-making</b> to define presence
+			accurately.</p>
+
+			<p><b>Demographic data</b> was drawn from two sources:
+			<ul>
+			  <li>The Registrar’s records (obtained under strict FERPA compliance controls)</li>
+			  <li>Course catalog + faculty feedback, used to classify academic plans (e.g., STEM, relative math demands)</li>
+			</ul>
+			</p>
+
+			<p><b>Client conversations</b> and a targeted <b>literature review</b> provided critical context, helping define the 
+			data approach and ensure its responsible interpretation.</p>
 			
 		<h2 class='mb-3'>Process and Findings, <i>in a nutshell</i></h2>
-			<p>Modeling DFW <b><i>risk</i> instead of <i>rate</i></b> resolved a fundamental issue about what "good" results
-			were amid a class that constantly offers untraced support events. The traditional accuracy calculation
-			for DFW <i>rate</i> would suffer in the presence of students who improved as the course progressed. We want 
-			students to improve - but that also counterintuitively implies we “want” as many predicted DFW's to go away; lower 
-			prediction accuracy. Disentangling improvements from predictions was possible using “sticky risk” instead of <i>rate</i>. 
-			"Sticky" because, once a student slipped into risk territory, they retained that status until the end - regardless 
-			of whether they improved signficantly thereafter. Now, our inability to trace support events is irrelevant, and
-			risk accuracy isn't penalized when a student improves.</p>
+			<p><b>Extensive preprocessing and feature engineering</b> were guided by client expertise and literature findings. 
+			These steps homogenized data meaning across terms and extracted valuable signals about student behaviors - 
+			like assessment preparedness and homework patterns in the short- and long-term.</p>
 			
-			<p>Tracking sticky risk required temporal data, so extensive pre-processing converted the end-of-course snapshot
-			into more of a "live," weekly granularity using new "data processing only" grading policies. These were harsher
-			than the real course grading policies (which could drop low grades in certain assignment categories) so as not to 
-			"mask" risky behaviors and performance. Still, student scores weren't punished for reasonable delays. For example, 
-			a student's assessment could be graded a few days after most others. The difference between scores derived from 
-			each set of policies is seen below:</p>
+			<p>The model focused on predicting DFW <b><i>risk</i> rather than <i>rate</i></b>. 
+			This distinction addressed a core challenge: students may improve mid-course thanks to untracked support efforts
+			(i.e. tutoring or study groups.) Traditional accuracy metrics for <i>rate</i> prediction would unfairly penalize 
+			the model in such cases. By defining “sticky risk” (once in risk, always in risk), we avoid this issue and 
+			ensure good interpretability.</p>
+
+			<p>Building temporal granularity was key. End-of-term grade snapshots were converted into weekly records 
+			using <b>custom grading policies</b>. Such policies were stricter than those in the live class to unmask risk.
+			For example, the lowest few assessment scores were no longer dropped. Still, they were fair:
+			students weren't penalized for normal grading delays.</p>
 			
 			<i>Live Grading Policies Provide a Significant Weekly Score Boost, Masking Struggling Performance</i>
 			<div class="col mb-4" style="max-width:690px">
 				<img src='images/projects/risk_prediction/Grading Policy Impact - Weekly.jpg' 
-					 alt='Impact of different grading policies on student weekly scores'
+					 alt='Boxplot showing how the live-course grading policies inflated student weekly scores relative to 
+					 the custom, strict policies'
 					 width='100%'
 					 border='1'>
 			</div>
 			
-			<p>The highest score masking by real course grading policies occured during the same timeframe we hoped to run 
-			predictions (somewhere between weeks 3 and 9). Thus, <b>raw scores from custom grading policies should 
-			be more accurate for predicting risk</b>.</p>
+			<p>We wished to avoid over-flagging students who would recover under the live, more forgiving grading policies. 
+			Using letter grade segmentation, a more precise score difference for D-students informed a new risk threshold setting.</p>
+
+			<p>To label DFW risk status with integrity, timing was important. For example, students may join the class late, or 
+			lack a sufficient collection of graded assignments during the initial weeks. Poor quality records weren't used.</p>
 			
-			<p>Score differences were also assessed by letter grade segmentation. For example, dropping the lowest 3 assessment 
-			scores would typically benefit a D student more than it would a B student. The average boost for raw D-students 
-			informed a raw score risk threshold choice. Its value was less prone to flag students who would 
-			likely escape risk under the live course grading forgiveness policies.</p>
-			
-			<p>The final decision concerning true DFW risk status labeling was determining when data had enough integrity to aptly 
-			describe each student. Students may join the class a few weeks late. In some semesters, the graders wanted to have 
-			all assessments in-hand before grading them. Any withdrawn students automatically received gradebook 0's instead of 
-			"earning" them. <b>A custom calculation identified which weeks could be assessed for DFW risk status per student</b>.</p>
-			
-			<p>Exploratory data analysis and associative rules revealed many potential features to use or navigate during modeling. 
-			Most notably, <b>at-risk students were far more likely to be unprepared for assessments by not completing all associated 
-			homework beforehand</b>. This behavior worsened as the course progressed:</p>
+			<p><b>Exploratory analysis and associative rules</b> identified risk signals and suggested preferences among similar features. 
+			At-risk students often fell behind on homework, especially as the course progressed:</p>
 			
 			<i>At-Risk Students Quickly Fell Behind on Their Homework Relative to Non-Risk Students</i>
 			<div class="col mb-4" style="max-width:690px">
 				<img src='images/projects/risk_prediction/boxplot vertical stack - st_ontime_1grp and lt_ontime.jpg' 
-					 alt='Boxplot demonstrating diminishing homework timeliness before each weekly assessment'
+					 alt='Boxplot showing at-risk students completing less homework on time compared to peers'
 					 width='100%'
 					 border='1'>
 			</div>
 			
-			<p>Correlation strengths amongst predictive features also changed over time, making <b>weekly models preferable to 
-			a single, generalized model</b>. Meanwhile, waiting longer to run a prediction also boosts accuracy. The following 
-			graphic demonstrates the combined impact on performance metrics over time:</p>
+			<p>Feature relationships shifted over time, making <b>weekly models</b> more effective than a single generalized one. 
+			Week 6 emerged as the optimal timeframe to perform predictions, as it balanced many requirements. 
+			Accurate predictions were to be made as early as possible, while minimizing instances of missed at-risk students:</p>
 			
-			<i>Week 6 Performance Balanced Accuracy, Missed Risks, and Urgency</i>
+			<i>Week 6 Performance Balanced Accuracy, Urgency, and Missed Risks</i>
 				<div class="col mb-4" style="max-width:690px">
 					<img src='images/projects/risk_prediction/cols lines - performance metrics time.jpg' 
-						 alt='Weekly performance metrics versus baselines'
+						 alt='A 100% stacked bar chart of baseline student risk proportions each week, compared with line charts 
+						 of different performance metrics'
 						 width='100%'
 						 border='1'>
 				</div>
 			
-			<p>Let's break down a few highlights:</p>
-			
+			<p><b>Highlights:</b></p>
 				<ul><li>The "checkmark" pattern formed by "risk history" background bars and black lined "naïve prevalence"
-				occurs because the number of students described by good quality data was starkly changing until (at least) 
+				occurs because the number of students described by good quality data was starkly changing until at least 
 				week four.</li>
-					<li>Naïve prevalence was a “no information” baseline – the accuracy resulting from flagging all students
-					for DFW risk. Our model accuracy hopes to be well above this.</li>
-					<li>Risk history was another baseline – the guaranteed accuracy provided by that sticky risk status alone.
-						Again, we want our model accuracy to be well above this.</li>
-					<li>Across candidate weeks 3-9, predictive accuracy did vastly exceed both baselines, indicating how 
-					significantly the other chosen predictors contributed to an accurate classification outcome.</li>
-				</ul>
-			
-			<p><b>It was recommended to use Week 6's logistic regression model</b> to predict DFW risk, as it balanced the business
-			requirements of maximizing accuracy ASAP in the course, while minimizing under-flagged students 
-			(false negatives, or "missed" risk students). <b>Nine DFW risk drivers</b> were compared and discussed.</p>
-			
-			<p>Model misclassification analysis reminded us that 100% accuracy isn't possible, especially when making 
-			predictions	too early in the course:</p>
-			
-				<ul><li>Week 6 occurs before the major holidays (Thanksgiving or Spring Break) - typical timeframes 
-				of some performance fatigue.</li>
-					<li>Commonly, well-performing students suffered on the cummulative final exam alone - sprouting <b>theories
-					around poor or neglected independent review of early-course concepts</b>, or <b>large test anxiety</b> (seen in 
-					the literature).</li>
-					<li>Also commonly, many students hovered around the risk threshold.</li>
-					<li>Unexpected and unrelated-to-course-performance events are also known to cause student withdrawls.</li>
-				</ul>
-			
-			<p>Including demographic data yielded a few more interesting trends that either agreed or conflicted with literature. 
-			In EDA, specific minority groups had a significantly more difficult time keeping up with homework than others, prompting 
-			<b>questions around the online homework platform's accessibility</b> and <b>potential cultural differences</b>. In misclassification analysis, certain 
-			minority groups were over-flagged for risk. <b>Incorporating their demographic identitifiers into a modified model would 
-			reduce excessive over-flagging</b> while keeping overall accuracy virtually the same.  
-			Such a model achieved <b>87.9% accuracy and an 89.5 F1-score, indicating a very well-performing risk 
-			predictor tool.</b> Balanced outputs per demographic segmentation indicated <b>unbiased</b> classifications, too. For 
-			the data scientists out there: performance metrics were derived via 100 iterations of repeated 5-fold cross-validation.</p>
-			
-			<p><b>The output tool:</b></p>
-			<p>Upon choosing a week to run the model, the script <b>automatically generated</b> the favored <b>Excel file</b> format of risk 
-			<b>predictions	alongside contextual explanation</b>. Students were ordered by <b>prioritized intervention</b>, and could 
-			be filtered on similar evidence (i.e. "this group isn't doing their homework and their assessment scores are suffering.")
-			Guiding a sense of "confidence" in the risk prediction, a custom metric informed the reviewer how close the 
-			prediction was to the decision threshold. If run after course-end, the output included additional columns
-			to compare risk against rate. <b>For the first time, improvement rates could be quantified and monitored.</b> Other 
-			university initiatives could be easily meshed with this output to <b>hasten response times</b>.</p>
-			
-			<p><b>Some limitations exist:</b></p>
-				<ul><li>These findings were derived from a university that's predominantly Caucasian, whose developmental math course 
-						population pursues academic plans with low- to average- math requirement levels. Findings may not translate
-						well to universities with significantly different demographic distributions	or class structures.</li>
-					<li>Canvas API record <b>scope changed over time for students who eventually withdrew</b>. About half of the withdrawn
-						students from earlier semesters were not represented well for models to learn from.</li>
-					<li>The latest semester (beyond this report's data range) has a <b>new structural change which may be incompatible
-						with this recommended model</b>. Prediction accuracy should be assessed on the new data before 
-						confidently applying its outputs.</li>
+					<ul><li>Naïve prevalence was a “no information” baseline – the accuracy resulting from flagging all students
+					for DFW risk.</li>
+						<li>Risk history was another baseline – the guaranteed accuracy provided by that sticky risk status alone.</li>
 					</ul>
-
-		<h2 class='mb-3'>Reflection</h2>
-			<p>Complying with FERPA considers data type, personnel access levels, and usage intentions. This had an effect on 
-			how much effort and collaboration it took to obtain data, how it was used, and what could (and couldn't) end up 
-			in the final model or its outputs.</p>
-
-			<p>On the one hand, sensitive student data is protected from careless and potentially damaging 
-			outcomes. On the other, I see how this complexity can silo departments and deter rich analyses. 
-			The client and I decided to retain extra anonymization and complexity in exchange for a richer analysis, knowing that 
-			the tool's user experience would somewhat suffer in this first development phase. Results showed the process could be 
-			simplified in a second phase, as we'd need considerably less data.</p>
+					<li>This model accuracy significantly outperformed both the naïve prevalence and sticky risk baselines.</li>
+					<li>Logistic regression at Week 6 achieved <b>87.9% accuracy</b> and <b>89.5 F1-score</b> 
+					(via 100× 5-fold cross-validation), while balancing outputs across demographics.</li>
+					<li><b>Nine DFW risk drivers</b> were compared and discussed.</li>
+				</ul>
+				
+			<p>Misclassification patterns revealed:
+			<ul>
+			  <li>Well-performing students occasionally struggled on the cumulative final, raising hypotheses about independent 
+			  review gaps or test anxiety.</li>
+			  <li>Students near the threshold were common - a natural challenge in classification.</li>
+			  <li>Unpredictable personal circumstances contributed to some withdrawals.</li>
+			</ul>
+			</p>
 			
-			<p>I loved working with demographic data. Psychology, culture, diversity - humans are fascinatingly complex. While 
-			much risk could be described through macrotrends, microtrends require different solutions. What a privilege to be trusted 
-			with this data, and use it to responsibly support the budding talent of the next generation!</p>
-		 
+			<p>Incorporating demographic features reduced over-flagging of certain minority groups without hurting accuracy -
+			producing <b>unbiased classifications</b> by segmentation. Stark behavioral differences were seen across 
+			some demographic segments, promoting two new perspectives from which to view course components and broader 
+			"introduction to college life" initiatives at the university.</p>
+
+			<p><b>The output</b> is an Excel file listing students by intervention priority, contextual evidence, and
+			proximity to the risk threshold (a custom metric) - supporting confident decisions. Class leadership is empowered
+			to see and cluster common trends. Post-course, comparisons of risk vs. rate provided valuable improvement tracking 
+			for future terms.</p>
+
+		<h2 class='mb-3'>Reflections</h2>
+			<p>This project reinforced how critical collaboration with subject matter experts is in building a meaningful, 
+			ethical model. Conversations with the client and her colleagues - along with insights from the literature - shaped key
+			decisions on data selection, feature engineering, and risk labeling. These inputs ensured the model reflected 
+			real-world dynamics rather than assumptions.</p>
+
+			<p>Working within FERPA constraints was both a challenge and an opportunity. It demanded thoughtful choices about 
+			what data to request, how to anonymize it, and how to balance richer analysis with privacy protections. The complexity
+			of obtaining and managing sensitive data initially added effort, but ultimately strengthened the integrity of the 
+			solution. Future phases could streamline this process with leaner data inputs while retaining predictive power.</p>
+
+			<p><b>Limitations and considerations:</b></p>
+			<ul>
+			  <li>The dataset came from a predominantly Caucasian university, with developmental math students mainly pursuing 
+			  degrees with low- to average- math requirements. Results may not generalize well to institutions with different 
+			  demographics or program structures.</li>
+			  <li>Canvas API data changed over time for students who eventually withdrew, limiting model learning from this 
+			  important group in the earlier semesters.</li>
+			  <li>The course underwent structural changes after the analyzed semesters. The recommended model should be 
+			  revalidated before applying it to newer data.</li>
+			</ul>
+
+			<p>Above all, this work deepened my appreciation for the complexity of student success. Macro trends pointed to 
+			clear risk factors, but micro trends reminded me of the human stories behind the data. I’m proud to have contributed 
+			responsibly to a tool aimed at supporting students’ growth and success.</p>		 
     </div>
   </section>
  </main>
